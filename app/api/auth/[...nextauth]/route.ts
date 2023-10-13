@@ -14,7 +14,9 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid Credentials");
         }
-        const url = `${process.env.NEXT_PUBLIC_APIURL}/login`;
+        console.log(process.env.NEXT_PUBLIC_Backend, "Env variables")
+        const url = `${process.env.NEXT_PUBLIC_Backend}/login`;
+        console.log(url,"AuthURL")
         const method = "POST";
         const body = JSON.stringify({
           email: credentials?.email,

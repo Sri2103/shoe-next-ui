@@ -4,6 +4,7 @@ import React, { Suspense } from "react";
 import LoginPage from "./loginPage";
 
 const Page = () => {
+    console.log(process.env,"Login page env client")
   return (
     <div className="flex max-w-9xl bg-gray-200 ">
       <div>

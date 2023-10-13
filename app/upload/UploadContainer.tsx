@@ -33,6 +33,7 @@ const ProductSchema = z.object({
 export type ProductValuesType = z.infer<typeof ProductSchema>;
 
 const UploadContainer = () => {
+    console.log(process.env,"Env in client component")
   const { state, dispatch } = useProductContext();
   const { toast } = useToast()
   const form = useForm<ProductValuesType>({

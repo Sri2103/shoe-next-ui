@@ -12,7 +12,7 @@ export async function AddToCart(
     type: CartActionTypes.ADD_TO_CART,
     payload: cartItem,
   });
-//   let url = `${process.env.NEXT_PUBLIC_APIURL}/cart/update`;
+//   let url = `${process.env.NEXT_PUBLIC_Backend}/cart/update`;
 //   let method = "post";
 //   let data = { cartId, cartItem };
 //   await axios(url, {

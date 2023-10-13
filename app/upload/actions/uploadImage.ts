@@ -10,7 +10,7 @@ export async function uploadProduct(productData:ProductValuesType) {
     }
   try {
     const { data, status } = await axios({
-        url: `${process.env.NEXT_PUBLIC_APIURL}/upload`,
+        url: `${process.env.NEXT_PUBLIC_Backend}/upload`,
         method:"post",
         data: JSON.stringify(body),
     }
@@ -32,7 +32,7 @@ export async function uploadProduct(productData:ProductValuesType) {
 export async function testRoute() {
   try {
     const { data, status } = await axios.get(
-      `${process.env.NEXT_PUBLIC_APIURL}/1dc7aa77-24ca-4120-b59e-9a7eb5e9d947`,
+      `${process.env.NEXT_PUBLIC_Backend}/1dc7aa77-24ca-4120-b59e-9a7eb5e9d947`,
 
       {
         headers: {
@@ -61,7 +61,7 @@ export async function testRoute() {
 export async function testPostRequest() {
   try {
     const { data, status } = await axios({
-        url:`${process.env.NEXT_PUBLIC_APIURL}/testPostRoute`,
+        url:`${process.env.NEXT_PUBLIC_Backend}/testPostRoute`,
         method:"post",
     });
     console.log(status);

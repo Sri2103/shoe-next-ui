@@ -11,8 +11,9 @@ export async function AddProduct(productData: ProductValuesType) {
     price: +price,
   };
   try {
+    console.log(process.env.NEXT_PUBLIC_Backend,"next public backend")
     const { data, status } = await axios({
-      url: `${process.env.NEXT_PUBLIC_APIURL}/products/upload`,
+      url: `${process.env.NEXT_PUBLIC_Backend}/products/upload`,
       method: "post",
       data: JSON.stringify(body),
     });
@@ -39,7 +40,7 @@ export async function GetAllProducts() {
     },
   };
   return (
-    fetch(`${process.env.NEXT_PUBLIC_APIURL}/products/allProducts`, requestOptions)
+    fetch(`${process.env.NEXT_PUBLIC_Backend}/products/allProducts`, requestOptions)
       .then((response) => response.json())
       // .then(result => console.log(result))
       .catch((error) => console.log("error", error))
@@ -47,7 +48,7 @@ export async function GetAllProducts() {
 }
 
 export async function fetchCart(userId: string) {
-  let url = `${process.env.NEXT_PUBLIC_APIURL}/cart/get/${userId}`;
+  let url = `${process.env.NEXT_PUBLIC_Backend}/cart/get/${userId}`;
   const requestOptions: RequestInit = {
     method: "GET",
     cache: 'no-store',
