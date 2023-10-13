@@ -1,0 +1,62 @@
+name: IBM cloud code engine deployment
+on:
+  push:
+    branches:
+    - master
+
+env:
+  GITHUB_SHA: ${{ github.sha }}
+  IBM_CLOUD_API_KEY: ${{ secrets.IBM_CLOUD_API_KEY }}
+  IBM_CLOUD_REGION: ca-tor
+  ICR_NAMESPACE: ns_1
+  REGISTRY_HOSTNAME: ca.icr.io
+  IMAGE_NAME: shoe_next_ui
+
+jobs:
+ deploy:
+   runs-on: ubuntu-latest
+
+   steps:
+    - name: Checkout
+      uses: actions/checkout@v4.1.0
+
+    - name: Install IBM Cloud CLI
+      run: |
+        curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
+        ibmcloud --version
+        ibmcloud config --check-version=false
+        ibmcloud plugin install -f container-registry
+        
+   
+    - name: Login to IBM Cloud Private Registry
+      run: |
+        ibmcloud login --apikey "${IBM_CLOUD_API_KEY}" -r "${IBM_CLOUD_REGION}"
+        ibmcloud target -g Default
+        ibmcloud cr login
+
+    - name: Get Commit SHA
+      id: get_sha
+      run: echo "::set-output name=SHA::$(git rev-parse --short ${{ github.sha }})"
+
+     # Build the Docker image
+    - name: Build with Docker
+      run: |
+        docker build -t "$REGISTRY_HOSTNAME"/"$ICR_NAMESPACE"/"$IMAGE_NAME":"$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" .
+
+    # Push the image to IBM Container Registry
+    - name: Push the image to ICR
+      run: |
+        docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
+
+    # Update code Engine application
+
+    # - name: Update code engine application
+    #   run: |
+    #     ibmcloud ce application update -n shoes-$GITHUB_REPOSITORY -k registry=$REGISTRY_HOSTNAME
+
+
+  
+  
+    
