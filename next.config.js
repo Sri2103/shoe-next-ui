@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
+const { configureRuntimeEnv } = require('next-runtime-env/build/configure');
 
-const Dotenv = require('dotenv-webpack');
-
+configureRuntimeEnv();
 const nextConfig = {
     // webpack:(config) => {
     //     new Dotenv({
@@ -15,6 +15,14 @@ const nextConfig = {
         
     },
     output: 'standalone',
+    env:{
+        baseUrl:"http://localhost:3000",
+        abc:"1234"
+    },
+    publicRuntimeConfig:{
+        Dummy_Val:"abcd"
+    }
+    
     
 }
 

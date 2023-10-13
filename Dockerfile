@@ -36,9 +36,12 @@ RUN yarn build
 FROM base AS runner
 WORKDIR /app
 
+ARG NEXT_PUBLIC_Backend
+
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_PUBLIC_Backend ${NEXT_PUBLIC_Backend}
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

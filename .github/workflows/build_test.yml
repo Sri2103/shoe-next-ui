@@ -1,0 +1,19 @@
+name: IBM cloud code engine deployment
+on:
+  push:
+    branches:
+    - build_test 
+
+
+env:
+    NEXT_PUBLIC_BACKEND: "localhost"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v2
+          - name: Build with Docker
+            run: |
+              docker build  .

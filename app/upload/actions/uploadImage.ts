@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ProductValuesType } from "../UploadContainer";
-export async function uploadProduct(productData:ProductValuesType) {
+export async function uploadProduct( productData:ProductValuesType) {
     const {name,description,image,price} = productData
     const body = {
         name ,

@@ -1,0 +1,1 @@
+window.__ENV = {"NEXT_PUBLIC_Backend":"http://localhost:5000"};

@@ -6,6 +6,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useProductContext } from "@/context/productContext";
+import * as next from'next/config'
 import {
   Form,
   FormControl,
@@ -29,10 +30,12 @@ const ProductSchema = z.object({
     message: "Entry required"
   })
 });
-
+ 
 export type ProductValuesType = z.infer<typeof ProductSchema>;
 
 const UploadContainer = () => {
+    
+    console.log("abc :>> ", next.default())
     console.log(process.env,"Env in client component")
   const { state, dispatch } = useProductContext();
   const { toast } = useToast()

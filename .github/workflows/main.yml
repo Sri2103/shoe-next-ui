@@ -2,7 +2,7 @@ name: IBM cloud code engine deployment
 on:
   push:
     branches:
-    - master
+    - release
 
 env:
   GITHUB_SHA: ${{ github.sha }}

@@ -17,6 +17,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import { AppSessionProvider } from "@/context/sessionProvider";
 import ShoppingCartIcon from "@/components/shoppinCartIcon";
 import { Toaster } from "@/components/ui/toaster";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +31,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+    const runtimeEnv = {
+        API_URL : process.env["NEXT_PUBLIC_Backend"]
+    }
+    console.log(process.env,"Env layout")
   const session = await getServerSession(authOptions);
 //   const data: InitialStateType = await readFileAsync();
 //   const pd = data.products;
@@ -39,9 +44,13 @@ export default async function RootLayout({
   const state: InitialStateType = {
     products: [ ...dataP],
     cart: cart || {},
+    env: runtimeEnv
   };
   return (
     <html lang="en">
+        <head>
+        <Script src="/__ENV.js"></Script>
+        </head>
       <body className={inter.className}>
         <AppSessionProvider session={session}>
           <ProductProvider data={state}>
