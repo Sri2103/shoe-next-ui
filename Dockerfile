@@ -45,6 +45,10 @@ ENV NODE_ENV production
 ENV NEXT_PUBLIC_Backend ${NEXT_PUBLIC_Backend}
 ENV NEXTAUTH_SECRET ${NEXTAUTH_SECRET}
 
+RUN echo $NEXT_PUBLIC_Backend
+RUN echo ${NEXTAUTH_SECRET}
+
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
