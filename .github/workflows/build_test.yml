@@ -6,7 +6,8 @@ on:
 
 
 env:
-    NEXT_PUBLIC_BACKEND: "localhost"
+    NEXT_PUBLIC_Backend: "localhost"
+    NEXTAUTH_SECRET: "12345"
 
 jobs:
     build:

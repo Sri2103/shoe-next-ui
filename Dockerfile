@@ -37,6 +37,7 @@ FROM base AS runner
 WORKDIR /app
 
 ARG NEXT_PUBLIC_Backend
+ARG NEXTAUTH_SECRET
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
