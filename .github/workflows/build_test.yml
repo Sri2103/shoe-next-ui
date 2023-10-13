@@ -1,4 +1,4 @@
-name: IBM cloud code engine deployment
+name: TestBuild stage
 on:
   push:
     branches:
