@@ -1,0 +1,17 @@
+# docker compose template for nextjs ?
+
+version: '3'
+services:
+  next_ui:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: shoeGo_ui
+    ports:
+      - "3000:3000"
+    environment:
+       NEXTAUTH_URL: http://localhost:3000
+       NEXTAUTH_SECRET: 1234
+       NEXT_PUBLIC_APIURL: https://application-f8.18g4jwn74w3g.ca-tor.codeengine.appdomain.cloud
+       API_URL: https://application-f8.18g4jwn74w3g.ca-tor.codeengine.appdomain.cloud
+    

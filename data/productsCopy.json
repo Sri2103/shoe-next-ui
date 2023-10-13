@@ -1,0 +1,29 @@
+{
+    "products": [
+        {
+            "name": "Adidas",
+            "description": "Shoe for running",
+            "price": "25",
+            "image": "ImageLink"
+        },
+        {
+            "name": "Nike",
+            "description": "Shoe for running",
+            "price": "25",
+            "image": "ImageLink"
+        },
+        {
+            "name": "Nike",
+            "description": "Shoe for running",
+            "price": "25",
+            "image": "ImageLink"
+        },
+        {
+            "name":"ProductId-1",
+            "description":"AdidasFootPro",
+            "image":"https://images.pexels.com/photos/812871/pexels-photo-812871.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+            "price":"200"
+
+        }
+    ]
+}
