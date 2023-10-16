@@ -41,8 +41,6 @@ const router = useRouter();
   });
 
   const onSubmit = async (data: LoginSchemaType) => {
-    console.log("onSubmit");
-    console.log(data);
     try {
     //   const callbackUrl = searchParams.get("callbackUrl") || "/";
       const res = await signIn(
@@ -54,10 +52,9 @@ const router = useRouter();
       ).then((callback) => {
         console.log(callback)
         if (callback?.error) {
-            // alert("Invalid credentials");
+         alert("Invalid credentials");
           }
           if (callback?.ok && !callback?.error) {
-           alert("Logged In");
             router.push("/");
           }
       });
