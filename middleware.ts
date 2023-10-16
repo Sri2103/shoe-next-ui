@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
       cookieName: "next-auth.session-token", // next-auth.session-token
     });
     // redirect user without access to login
-    if (token?.accessToken && Date.now() / 1000 >  token?.accessExpiry  ) {
+    if (!token || token?.accessToken && Date.now() / 1000 >  token?.accessExpiry  ) {
         const url = request.nextUrl.clone()
         url.pathname = '/login'
         return NextResponse.rewrite(url)

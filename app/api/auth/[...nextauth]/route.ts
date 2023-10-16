@@ -45,8 +45,7 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account, profile }) {
-
-        if (user && token.accessExpiry - Date.now()/1000 < 300){
+        if (token && token.accessExpiry - Date.now()/1000 < 300){
             try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_Backend}/refresh-token`,{
                     headers : {authorization:`Bearer ${token.refreshToken}`}
