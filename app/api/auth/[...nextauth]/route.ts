@@ -14,9 +14,7 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid Credentials");
         }
-        console.log(process.env.NEXT_PUBLIC_Backend, "Env variables")
         const url = `${process.env.NEXT_PUBLIC_Backend}/login`;
-        console.log(url,"AuthURL")
         const method = "POST";
         const body = JSON.stringify({
           email: credentials?.email,
@@ -33,7 +31,6 @@ export const authOptions: NextAuthOptions = {
         }
 
         const user = response.data;
-
         return { ...user, name: user.username };
       },
     }),
@@ -47,6 +44,34 @@ export const authOptions: NextAuthOptions = {
     newUser: "/signup",
   },
   callbacks: {
+    async jwt({ token, user, account, profile }) {
+
+        if (user && token.accessExpiry - Date.now()/1000 < 300){
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_Backend}/refresh-token`,{
+                    headers : {authorization:`Bearer ${token.refreshToken}`}
+                })
+                const data = await res.json();
+                const {accessToken, expirationTime} = data.data
+                // Update the tokens in the NextAuth state
+                token.accessToken = accessToken
+                token.accessExpiry = expirationTime
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+      return { ...token, ...user };
+    },
+
+    async session({ session, user, token }) {
+      return {
+        ...session,
+        accessToken: token.accessToken,
+        refreshToken: token.refreshToken,
+        id: token.id,
+      };
+    },
     async signIn({ user, account, profile, email, credentials }) {
       return true;
     },
@@ -55,19 +80,7 @@ export const authOptions: NextAuthOptions = {
       return baseUrl;
     },
 
-    async session({ session, user, token }) {
-      return {
-       ...session,
-        accessToken: token.accessToken,
-        refreshToken: token.refreshToken,
-        id: token.id,
-      };
     // return session
-    },
-
-    async jwt({ token, user, account, profile }) {
-      return { ...token,...user };
-    },
   },
   // cookies:{
 

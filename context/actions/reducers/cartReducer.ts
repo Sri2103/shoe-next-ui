@@ -3,8 +3,6 @@ import { Cart, CartItem } from "@/types/cart";
 import React from "react";
 
 const CartReducer = (state: Cart, action: { type: any; payload: any }) => {
-  console.log("prevState", state);
-  console.log("action", action);
   switch (action.type) {
     case CartActionTypes.ADD_TO_CART:
       const cartItems = state.cartItems || [];
@@ -37,7 +35,6 @@ const CartReducer = (state: Cart, action: { type: any; payload: any }) => {
       }
 
     case CartActionTypes.DELETE_FROM_CART:
-      console.log(action.payload, "ActionPayload delete function");
       const updatedCartItems = state.cartItems.filter(
         (i) => i.productId != action.payload.id
       );

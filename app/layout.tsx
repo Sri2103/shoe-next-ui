@@ -34,7 +34,6 @@ export default async function RootLayout({
     const runtimeEnv = {
         API_URL : process.env["NEXT_PUBLIC_Backend"]
     }
-    console.log(process.env,"Env layout")
   const session = await getServerSession(authOptions);
 //   const data: InitialStateType = await readFileAsync();
 //   const pd = data.products;

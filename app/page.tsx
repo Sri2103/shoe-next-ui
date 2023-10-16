@@ -31,7 +31,7 @@ export default function Home() {
         </div>
       </div>
       <div className="grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 md:gap-6 md:pt-8 gap-6">
-        {products?.map((p) => (
+        { products && products.length >0 && products?.map((p) => (
           <ProductCard key={p.id} product={p} />
         ))}
       </div>

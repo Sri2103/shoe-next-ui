@@ -9,11 +9,11 @@ services:
     container_name: shoeGo_ui
     ports:
       - "3000:3000"
-    environment:
-       - NEXTAUTH_URL= http://localhost:3000
-       - NEXTAUTH_SECRET= 1234
-       - NEXT_PUBLIC_Backend= http://shoe-go:5000
-       - API_URL= https://application-f8.18g4jwn74w3g.ca-tor.codeengine.appdomain.cloud
+    # environment:
+    #    - NEXTAUTH_URL= http://localhost:3000
+    #    - NEXTAUTH_SECRET= 1234
+    #    - NEXT_PUBLIC_Backend= http://shoe-go:5000
+    #    - API_URL= https://application-f8.18g4jwn74w3g.ca-tor.codeengine.appdomain.cloud
     networks:
       - shoe_go_next
 
