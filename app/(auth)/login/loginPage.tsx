@@ -62,6 +62,7 @@ const router = useRouter();
     } catch (error) {
       console.log(error);
     }
+    
   };
   return (
     <div className=" mx-12 px-12">

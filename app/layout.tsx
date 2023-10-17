@@ -31,9 +31,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-    const runtimeEnv = {
-        API_URL : process.env["NEXT_PUBLIC_Backend"]
-    }
   const session = await getServerSession(authOptions);
 //   const data: InitialStateType = await readFileAsync();
 //   const pd = data.products;
@@ -43,7 +40,6 @@ export default async function RootLayout({
   const state: InitialStateType = {
     products: [ ...dataP],
     cart: cart || {},
-    env: runtimeEnv
   };
   return (
     <html lang="en">

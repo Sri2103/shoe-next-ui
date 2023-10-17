@@ -10,6 +10,11 @@ const Page = () => {
   const { state } = useProductContext();
   const cart = state.cart;
   const cartLength = cart && cart.cartItems?.length || 0
+  let subtotal:number
+  subtotal = 0
+  cartLength > 0 && cart.cartItems.forEach(cartItem => {
+    subtotal += cartItem.quantity * cartItem.product.price
+  })
   return (
     <div className=" flex w-[80rem]  mx-auto border border-slate-200 rounded-[0.9rem] justify-between">
       <div>
@@ -52,7 +57,7 @@ const Page = () => {
         <div className="flex flex-col gap-y-4 mt-4 mx-5 text-[#fefcfc]">
           <div className="flex justify-between items-center">
             <div>Subtotal</div>
-            <div>$1,668</div>
+            <div>${`${subtotal}`}</div>
           </div>
           <div className="flex justify-between items-center">
             <div>Shipping</div>

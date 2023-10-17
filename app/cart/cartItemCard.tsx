@@ -5,15 +5,21 @@ import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { useProductContext } from "@/context/productContext";
 import CartActionTypes from "@/context/actionTypes/cartActionTypes";
+import { DeleteCartItem } from "@/context/actions/client/cart";
 
 const CartItemCard = ({ cartItem }: { cartItem: CartItem }) => {
-  const { dispatch } = useProductContext();
+  const { state, dispatch } = useProductContext();
   const { product, quantity } = cartItem;
   const deleteCartItem = () => {
-    dispatch({
-      type: CartActionTypes.DELETE_FROM_CART,
-      payload: { id: cartItem.productId },
-    });
+    DeleteCartItem(state.cart.id, cartItem)
+      .then(() =>
+        dispatch({
+          type: CartActionTypes.DELETE_FROM_CART,
+          payload: { id: cartItem.productId },
+        })
+      )
+      .catch((err) => console.error(err));
+
     console.log("cartItem delete clicked");
   };
   return (
