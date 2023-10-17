@@ -49,8 +49,8 @@ export default async function RootLayout({
       <body className={inter.className}>
         <AppSessionProvider session={session}>
           <ProductProvider data={state}>
-            <div className="w-full">
-              <div className="flex py-12 items-center justify-around">
+            <div className="w-full relative">
+              <div className=" sticky top-0 flex py-12 items-center justify-around z-40 bg-teal-100 rounded-b">
                 <Link href="/">
                   <h1 className="text-xl font-semibold sm:text-center">
                     ShoeMart

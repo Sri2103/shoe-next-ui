@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from "next/server";
 // })
 
 
-export const config = { matcher: ["/"] }
+export const config = { matcher: ["/","/cart","/shoes"] }
 
 export async function middleware(request: NextRequest) {
     const token = await getToken({

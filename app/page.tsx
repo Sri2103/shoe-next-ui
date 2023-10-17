@@ -5,7 +5,7 @@ import { useProductContext } from "@/context/productContext";
 export default function Home() {
   const { state } = useProductContext();
 
-  const products = state.products
+  const products = state.products;
 
   return (
     <main>
@@ -30,10 +30,10 @@ export default function Home() {
           </span>
         </div>
       </div>
-      <div className="grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 md:gap-6 md:pt-8 gap-6">
-        { products && products.length >0 && products?.map((p) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
+      <div className="grid xl:grid-cols-5 lg:grid-cols-3 md:grid-cols-2 md:gap-6 md:pt-8 gap-6 sm:mx-24">
+        {products &&
+          products.length > 0 &&
+          products?.map((p) => <ProductCard key={p.id} product={p} />)}
       </div>
     </main>
   );
