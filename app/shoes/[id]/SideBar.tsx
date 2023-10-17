@@ -14,16 +14,6 @@ const SideBar = ({ product }: { product: ProductValuesType }) => {
 
   const { dispatch, state } = useProductContext();
   const cartId = state.cart.id;
-  const AddItemToCart = async () => {
-    const cartItem: CartItem = {
-      productId: product.id,
-      quantity: quantity,
-      product,
-    };
-    console.log("add to cart");
-    console.log(cartItem, "cartItemClicked");
-    await AddToCart(cartId, cartItem, dispatch);
-  };
   return (
     <div className="w-full mx-[7rem]">
       <div className="flex mx-auto gap-12 my-12 ">
