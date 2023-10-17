@@ -15,7 +15,7 @@ export function DeleteCartItem(cartId: string, cartItem: CartItem) {
   let url = `${process.env.NEXT_PUBLIC_Backend}/cart/delete`;
   let modUrl = new URL(url);
   modUrl.searchParams.set("cartId", cartId);
-  modUrl.searchParams.set("productId", cartItem.productId);
+  modUrl.searchParams.set("cartItemId", cartItem?.id || "");
   console.log("modURL", modUrl);
   let method = "delete";
   return axios(modUrl.toString(), {
