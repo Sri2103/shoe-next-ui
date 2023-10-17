@@ -6,30 +6,44 @@ import { ProductValuesType } from "@/app/upload/UploadContainer";
 import { CartItem } from "@/types/cart";
 import { AddToCart } from "@/context/actions/client/cart";
 import CartActionTypes from "@/context/actionTypes/cartActionTypes";
+import { toast, useToast } from "./ui/use-toast";
 
 interface props {
   product: ProductValuesType;
   quantity: number;
 }
 const AddToCartButton: React.FC<props> = (props) => {
+  const { toast } = useToast();
   const { state, dispatch } = useProductContext();
-//   console.log(state,"AppState")
   const cart = state.cart;
   const { product, quantity } = props;
-  const handleAddToCart = async (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault()
-    e.stopPropagation()
+  const handleAddToCart = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
     const cartItem: CartItem = {
       productId: product.id,
       quantity: quantity,
       product,
     };
-    console.log("Add to button clicked")
-    dispatch({
-        type: CartActionTypes.ADD_TO_CART,
-        payload: cartItem,
-      });
-    return
+
+    
+     AddToCart(cart.id, cartItem)
+      .then(() =>
+        toast({
+          title: "Product added",
+          description: `${cartItem.product.name}`,
+        })
+      )
+      .then(() =>
+        dispatch({
+          type: CartActionTypes.ADD_TO_CART,
+          payload: cartItem,
+        })
+      ).catch(e => console.error(e,"Error adding to cart"))
+
+    return;
   };
   return (
     <div>

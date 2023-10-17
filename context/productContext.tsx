@@ -18,7 +18,7 @@ import CartReducer from "./actions/reducers/cartReducer";
 export type InitialStateType = {
   products: ProductValuesType[];
   cart: Cart;
-  env: any;
+ 
 };
 
 const initialState: InitialStateType = {
@@ -29,7 +29,6 @@ const initialState: InitialStateType = {
     status: false,
     cartItems: [],
   },
-  env:{}
 };
 
 // const ProductReducer = (

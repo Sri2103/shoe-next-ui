@@ -1,33 +1,27 @@
-import CartActionTypes from "@/context/actionTypes/cartActionTypes";
 import { CartItem } from "@/types/cart";
 import axios from "axios";
-import { Dispatch } from "react";
 
-export async function AddToCart(
-  cartId: string,
-  cartItem: CartItem,
-  dispatch: Dispatch<any>
-) {
-  dispatch({
-    type: CartActionTypes.ADD_TO_CART,
-    payload: cartItem,
+export async function AddToCart(cartId: string, cartItem: CartItem) {
+  let url = `${process.env.NEXT_PUBLIC_Backend}/cart/update`;
+  let method = "post";
+  let data = JSON.stringify({ cartId, cartItem });
+  return axios(url, {
+    method,
+    data,
   });
-//   let url = `${process.env.NEXT_PUBLIC_Backend}/cart/update`;
-//   let method = "post";
-//   let data = { cartId, cartItem };
-//   await axios(url, {
-//     method,
-//     data,
-//   })
-//     .then((res) => res.data)
-//     .then((res) => {
-//       console.log(res, "Received from Api");
-//       dispatch({
-//         type: CartActionTypes.ADD_TO_CART,
-//         payload: cartItem,
-//       });
-//     })
-//     .catch((err) => console.error(err));
 }
 
-
+export function DeleteCartItem(cartId: string, cartItem: CartItem) {
+  let url = `${process.env.NEXT_PUBLIC_Backend}/cart/delete`;
+  let modUrl = new URL(url);
+  modUrl.searchParams.set("cartId", cartId);
+  modUrl.searchParams.set("productId", cartItem.productId);
+  console.log("modURL", modUrl);
+  let method = "delete";
+  return axios(modUrl.toString(), {
+    method,
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+    },
+  });
+}
