@@ -27,8 +27,6 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-COPY .env.docker .env.production
-
 RUN yarn build
 
 # If using npm comment out above and use below instead
@@ -38,14 +36,14 @@ RUN yarn build
 FROM base AS runner
 WORKDIR /app
 
-# ARG NEXT_PUBLIC_Backend
-# ARG NEXTAUTH_SECRET
+ARG NEXT_PUBLIC_Backend
+ARG NEXTAUTH_SECRET
 
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
-# ENV NEXT_PUBLIC_Backend ${NEXT_PUBLIC_Backend}
-# ENV NEXTAUTH_SECRET ${NEXTAUTH_SECRET}
+ENV NEXT_PUBLIC_Backend ${NEXT_PUBLIC_Backend}
+ENV NEXTAUTH_SECRET ${NEXTAUTH_SECRET}
 
 RUN echo $NEXT_PUBLIC_Backend
 RUN echo $NEXTAUTH_SECRET
