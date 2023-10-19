@@ -20,7 +20,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const redirectionLink = `/shoes/${product.id}`;
   return (
-    <Card className="w-[20rem] h-[24rem]">
+    <Card className=" sm:w-[cal(100%-12px)] sm:h-[calc(100%-12px)] md:w-[calc(100%-8px)] md:h-[cal(100%-12px)] lg:w-[20rem] lg:h-[24rem]">
       <Link href={redirectionLink}>
         <CardHeader>
           <CardTitle>{product.name}</CardTitle>
@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             width={200}
             height={100}
             alt={product.name}
-            className="w-[264px] h-[180px] rounded-lg"
+            className=" w-[360px] h-[240px] lg:w-[264px] lg:h-[180px] sm:w-[calc(100%-40px)] rounded-lg"
           />
        </CardContent>
       </Link>
